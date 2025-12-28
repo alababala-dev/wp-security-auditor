@@ -1,0 +1,132 @@
+==================================================
+Security Assessment Report for: https://your-site.com
+Date: Sun Dec 28 09:23:10 AM EST 2025
+==================================================
+
+### TEST 1: Checking for Exposed Configuration Files ###
+
+Testing: https://your-site.com/wp-config.php
+HTTP/2 403 
+
+Testing: https://your-site.com/.env
+HTTP/2 403 
+
+Testing: https://your-site.com/wp-config.php.bak
+HTTP/2 403 
+
+Testing: https://your-site.com/.git/config
+HTTP/2 403 
+
+Testing: https://your-site.com/config.php
+HTTP/2 403 
+
+Testing: https://your-site.com/.htaccess
+HTTP/2 403 
+
+Testing: https://your-site.com/phpinfo.php
+HTTP/2 403 
+
+### TEST 2: XML-RPC Exploitation Check ###
+
+<!DOCTYPE html>
+<html style="height:100%">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title> 403 Forbidden
+</title><style>@media (prefers-color-scheme:dark){body{background-color:#000!important}}</style></head>
+<body style="color: #444; margin:0;font: normal 14px/20px Arial, Helvetica, sans-serif; height:100%; background-color: #fff;">
+<div style="height:auto; min-height:100%; ">     <div style="text-align: center; width:800px; margin-left: -400px; position:absolute; top: 30%; left:50%;">
+        <h1 style="margin:0; font-size:150px; line-height:150px; font-weight:bold;">403</h1>
+<h2 style="margin-top:20px;font-size: 30px;">Forbidden
+</h2>
+<p>Access to this resource on the server is denied!</p>
+</div></div></body></html>
+
+
+### TEST 3: Directory Listing Check ###
+
+Testing directory: https://your-site.com/wp-content/uploads/
+OK: Directory listing disabled
+
+Testing directory: https://your-site.com/wp-content/plugins/
+OK: Directory listing disabled
+
+Testing directory: https://your-site.com/wp-content/themes/
+OK: Directory listing disabled
+
+Testing directory: https://your-site.com/wp-includes/
+OK: Directory listing disabled
+
+### TEST 4: WordPress User Enumeration ###
+
+Testing: https://your-site.com/?author=1
+HTTP/2 403 
+
+Testing: https://your-site.com/wp-json/wp/v2/users
+{"code":"rest_user_cannot_view","message":"Sorry, you are not allowed to list users.","data":{"status":401}}
+
+### TEST 5: WooCommerce API Exposure ###
+
+{"code":"woocommerce_rest_cannot_view","message":"\u05d0\u05d9\u05d5 \u05dc\u05da \u05d4\u05e8\u05e9\u05d0\u05d5\u05ea \u05dc\u05d4\u05e6\u05d9\u05d2 \u05e8\u05e9\u05d9\u05de\u05ea \u05de\u05e9\u05d0\u05d1\u05d9\u05dd.","data":{"status":401}}
+{"code":"woocommerce_rest_cannot_view","message":"\u05d0\u05d9\u05d5 \u05dc\u05da \u05d4\u05e8\u05e9\u05d0\u05d5\u05ea \u05dc\u05d4\u05e6\u05d9\u05d2 \u05e8\u05e9\u05d9\u05de\u05ea \u05de\u05e9\u05d0\u05d1\u05d9\u05dd.","data":{"status":401}}
+
+### TEST 6: Version Information Exposure ###
+
+WordPress Version:
+
+Generator Tag:
+
+
+### TEST 7: WordPress readme.html Exposure ###
+HTTP/2 403 
+
+
+### TEST 8: robots.txt and Sitemap Check ###
+
+robots.txt:
+<!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}body{display:flex;flex-direction:column;height:100vh;min-height:100vh}.main-content{margin:8rem auto;padding-left:1.5rem;max-width:60rem}@media (width <= 720px){.main-content{margin-top:4rem}}.h2{line-height:2.25rem;font-size:1.5rem;font-weight:500}@media (width <= 720px){.h2{line-height:1.5rem;font-size:1.25rem}}#challenge-error-text{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iI0IyMEYwMyIgZD0iTTE2IDNhMTMgMTMgMCAxIDAgMTMgMTNBMTMuMDE1IDEzLjAxNSAwIDAgMCAxNiAzbTAgMjRhMTEgMTEgMCAxIDEgMTEtMTEgMTEuMDEgMTEuMDEgMCAwIDEtMTEgMTEiLz48cGF0aCBmaWxsPSIjQjIwRjAzIiBkPSJNMTcuMDM4IDE4LjYxNUgxNC44N0wxNC41NjMgOS41aDIuNzgzem0tMS4wODQgMS40MjdxLjY2IDAgMS4wNTcuMzg4LjQwNy4zODkuNDA3Ljk5NCAwIC41OTYtLjQwNy45ODQtLjM5Ny4zOS0xLjA1Ny4zODktLjY1IDAtMS4wNTYtLjM4OS0uMzk4LS4zODktLjM5OC0uOTg0IDAtLjU5Ny4zOTgtLjk4NS40MDYtLjM5NyAxLjA1Ni0uMzk3Ii8+PC9zdmc+");background-repeat:no-repeat;background-size:contain;padding-left:34px}@media (prefers-color-scheme: dark){body{background-color:#222;color:#d9d9d9}}</style><meta http-equiv="refresh" content="360"></head><body><div class="main-wrapper" role="main"><div class="main-content"><noscript><div class="h2"><span id="challenge-error-text">Enable JavaScript and cookies to continue</span></div></noscript></div></div><script>(function(){window._cf_chl_opt = {cvId: '3',cZone: 'your-site.com',cType: 'managed',cRay: '9b51b7f61f9ae090',cH: 'iZq3j9VhPB.WdrRFF9ClGzEt.EmyHN5Pg9DrZMoqaDc-1766931838-1.2.1.1-0YacXN42Jkn9BGMXRXLfg4f30TCbyVK2f0WbIrQRAO8o25SQPjUBitSUtZXS_y_6',cUPMDTk:"\/robots.txt?__cf_chl_tk=DQ6g8xehpXByUdCA87YS1aGJNn232AL09C92cxNV3yE-1766931838-1.0.1.1-xlisPwV6MXhwDjl02eXRFQNsKAgp5SIHwYnrDaFtr0I",cFPWv: 'g',cITimeS: '1766931838',cTplC:0,cTplV:5,cTplB: '0',fa:"\/robots.txt?__cf_chl_f_tk=DQ6g8xehpXByUdCA87YS1aGJNn232AL09C92cxNV3yE-1766931838-1.0.1.1-xlisPwV6MXhwDjl02eXRFQNsKAgp5SIHwYnrDaFtr0I",md: 'HReR9mSIe78DUageE1LAB9zWhQd4W2PtDupCcBkdFFc-1766931838-1.2.1.1-GZkVM.BqGxXIVz3MGDdy0Cu.GPCuOW6WT4L9LbLqai8BY7VzUsFDl0hmKDFUXBZJUU7k_PWaj9Qhh3ao9AijfLjZz24hQlwpngWdC8aST9f3W4baWr47LIVtzCniWrXvfouoPnR1YZf4ljja_2XtpIEH16poSh6M1UaiMTKxddGyMRnxvpRYbPBUcL6MrbfPmajp3McsPw7VNm9zCOCcOMjCAHicmmzeEOg04OvIJorWIgAnZWSwoBxOHpIMkzLB3cKeTHUlv6_Y4RfRU7UbMnd.qiam._zO3BCoe3RnDWdh9sVaUbG2IiDQM4ejciBWNF.faxlPBgS.XZm3L2oq7EpLXbHy2PK0fOy17MCO4MQkWJ9QH4DUFsbzzWiITkOYzKrf3_l1siaPmgwYUtoe54vH7I9PvQrzCqTRokj2vZt4H7BsNdTs3d_1FcCpODf2ZAsZXr28w4l8FJWIWIWfZWtcHbZi4Q07iyoyewbZlAwRADwowvuffEAWxeAIi.Ia0c5QV4OXpttyYYrHdUvks6yev9atlwrhgL.5M2aXpMUk_0dpLozM.jDgGZX2V6vZiqWxot0W0fj61odHi80TFeMsD34cPAsq13qcnekdfz_fX41zK2EtSzOpkmfxiytmvCD8yeLS2sys_vhf137yoDMBPGGZqsGxW03ZriYcnokA2TV65lzNszDnIjvg07tRETBEwO5dpsr0u5w0bSnerkqgWLqq2URWIslx_po4oyZdPaO1hex0O0sy21r.ZrU4Q5KhusHlkjWZRM7PsMStOLIKMWYRhMZ.NYTrwA0bniHY3mDFl79gB3R7snkc2mn9AhN7tGSY6qYovlUpQZi47DJBdAGz6HAo7mjl5mbM36eaDmL3djTYP6B.SvJAFAMmnuvX42lJYD6Zjb1NQ6jf3Q',mdrd: 'HtrhKBm_akxC7nKV77Mz1gyyejhALTUGuREOJWU8MY4-1766931838-1.2.1.1-Lwrxx4woeFVRrs7C613Phm_9ic2WcRArYo9P1S9zxeO_lnc362a9gVgBldjiHIu3PptCNbMk7N_P00GjhOAEBFNivm0FQXxKqiOITwi8BoqMl8oGMVTdgb1pCEWtCjUx_.l7cQSRFjkfEREnF1kGpb6DWEc2pTPVOVNQhKgi2xwj9DYPTlMX.mlcP58B.aJh9BLsPCdT1HtQ0tuis9dBTLeBtb3lH8MzfBdJD8QDzRQ74Bi.l9cZD1BYFDeNXy1W93H_3DCQkFCN4fIRD1Ik1AMhcL98bgIDXHKeP5ejNR8R_r_v.vMkHonCzBjKe..z8Rz1tWXcsmLEhlL_ihvuD_oAz2.Yz1Mn6lGwlyKi7PmoRAuBTuaqaxFHRlg4MM2_CS3Jz1gM3vtKe4hkULJnRsQFvwBBG9peDqgdg.naNov5n4gHDzrelK4ZNZT_yv_x3bnwBG4uLppMW126gOdqgzgvIYHdX6KmjHksTIgca1XOu12.5oo9ej7b_jZ_SAlte7_rrTIguXeMsrNjDQKkWfISmEiozv3kszTQKCZcJweIOmGRtAkKxRXzzxHnQqaSXs653fK0VqbvKSUiWyidk4YzQ7xT9_ihXdqBb2yDBszzxkBAyN0XM7JU1.V7qWNFCeTGoOTteMiI_U5HH8i4i7v6Ayfqm9P1gZ7yjDp_._fVqtOkO2hPOU0EtnjrUkJIXUedUqDfMeNZL45yCbU4uChEwbkY.KAb0pyEzpduJtLzTaAsL8pHz_T7Oy7EwOwvUrEXrvFTa1HK5H6I7RPhRUFeN6byT8SQNODwhGv4RfmJh7QCK9wyO8JIwKRHNaT3aU_iMNcdpQ3trOb1.tMl4eaFFNQq6tvBzhCswgJ_kbivUxX2UAUixQNUk4kqZHfcUYNSwn0ml7W.rDhPUWBCOnAndAYdNiV5Bz4qzypq3XdrdaTF8rMDTaXrU4Sw4pA8sGiz_UQlakR2aYD1JoTpQ4DJv45HPQn43qSMUoHe8ey87KPlNDBZ4HbCaWpBeCTDnHcJsekKkUHejiKTaR0GJOp_S_PT9A5UmiVdFRomDZXy8MeX1NrBy1qZ05qhpZw.BIKqvDzTvOKHTplMdHGfztSTcYxuiBU0yUgYjCC9ydbaUsFi1pIAsWZLC24L947rKCMlqfd2jeB1X.pwt8m_oXVygMf1qjPrOusPkZwTnf0.c_YShPxwr2P4u_lowKwbvuKPNVbSiBXUKw9dqmQYY_Xo.J1uc3EO48f..1hCMpCNF2rGL5GFc.R7lXgImje3a8hqsV0pcOpggPAXmXnM8lcs1G6uuLcT1NGTw64WWpA.g_cQ1loMQV58VVjbt1zkDUISyfl_Eon5dBge_HOc1XoofpRoUwKctMLcOCLAgGvc2xPHHpMFzoAUCny5ezUNxwfY0CD2B_PMZZA70.xaAjbsRz3bawqRa1lMQA.AG_GQAuoi_fqUosxoeuYi0iJFokxK2INqXLHrXSA0sklUmo.2c0Yeg6yrnRr23Pck.LnYEo86bZo.Jl8_VzSwIB0VN.Vt0wD7AXWD2Oxxc.whxurzytdc8c8riXzbBM0FKfRXYNtgwAstBqnesZYB32Vo2DwNZvuoDEIaU8fBuDCCeoATjKQvPuDGtPlUtWNnkfw8XRLhG.MKkEGeCYGfCnidkPZfr_m9qp9EUZKSYE0raA2Ffn3lm8enuV4C4yLeI7ID49teG9v7BKEmtdysL37Gq.r2fPyutV.z7krNJOdUHAKz5FegCeUvcdR.TkhoTXQhV48Xz3zJ7L7HPWNI6ErJ.GL9R6BmzVBPQAZrvwbMGFUzy_QGAPf9tnEnDSWeDWu5vUIGQOddpKz2CHGB5C7p_ms_gDCZlK0Fa_mY2r3xfs2XnMcFxKRpDiF.8hTurnmz2XQc1lQchu5Mi9wMAL2.Y8pq82ky2CuS3Khg_mbYqsnMmsx9.XLUyT9PhEcVpi7JVWG2xydjkbUI1AwTrtESkWp6_JVBBg4NId7Q8knSD7wZII3dl_ocaml_Rb3QAqpqkqYdfGL02dmhSAUZ.K_i7c036GJfm9EjFtytZBQJx6LRaFlKi1o8ViOCJeQHvC_OpfshZZjIoWlkYn8aqSAY8FkjK3FPnN9dthYb5inec1aZt_vqQZSy_OI5rFYQiHGOxU59wJ8cZQWwMYOo_0qM_iptua9va0q_uuVc.Qo01KXnAvbNPoJw1pgDjOoj4cR_eZvDTOM66cCXlGw_Xpti_jTLodmCSjUyZUVBZ5SIsydDrLQkjea7D6bi.oKyHxdUvNPvdQiXqMI_2lbbri7tpgCdjWcPHgcBNnjlmVrbRDNNlI03A.uCe28yE8m.6L3Vr1LdcNOS_ZK0bexG.P7m2TwbDPi_xem3WPxXCyV4Dl.xirOGWSg7x5o81TWF6GpMci.9lcJ6lFxmpUC7z49TefUyWIbHILa5iiNnJ_1d2wSq5Q2tKQGwtNFg0b00iCMRXQ7cKiaiBLXA_GphptqsOO_ckZ6xOj4k4yIIb.fIxVcXY01u0sSvOMrwcMQMbF7kWuvD.mmh12qwDTyz3noWS1jSAQwkB5O_ktWyN_zWC36KoeHH41OiXrKXPwFm44Qw_toDL2VSjG8b8cFucQ_mUvGXeNXqHaH8cT3VxRZj.9onc9Amg_RuN5vylwwFMMRPBwPrXfZKLf1fU_IHCUeg7RWOLWHJnpaVk97HEan44_UYCEHjFRhacLl1_AOTA0xi_o_A.jdN9TZxue4ke2CLcG0OLdeMMXJzkHDlQs5GFvs9j5WZpoJwy3ensJQV1Sq3jLoH769Lp9g7qsWhgALsF3hkxBNg86QgEpBulZQ60VEm7YW7Xx9zRnRTM4qi.jyq5HF3to.X3BxmhueBGhaKNCm9dHfOn07XXR_k9MmZloffPkIah_pb.dy25sqv0REmHM6Y8QbcTtoXdT9vezF4NxLUz8g39cGOg9daAYUkPrClnYEGqb18OIUXt8CnEALHfYO2upe8oRVSjwPuzck2O7JH5hgDjI_1gXFhbTXXmS_JcpOEIHlMtEfkbMEqY8Came3kqa_9HglmTklGRRi1sDYp8EEu6ur40Gj.ueWr30M1hrtthrgkDbkTQLXZ0iuC_sFHDGvVHtmcG5mdppHb_UsG3gMKyo0jAWuW91nvRI9v.bm7Lzl3J9cWCHK_BWlWyI_GBi.1YGAzALI1DbQCrgdKNukgQ8q1b.aLkdSHisGRCWTHti2foirjxBqDnapVbpeUIq9zSIfrj6ET5uE78JcvUIEz_ruPEAs_h.HiQW3xf2rJJVaqtM6IqqjcCNLl6iXR0K2Q5NZyhMLoD5Kn6eyMsupmOJ6vnCnylwvrfDCXXPiJvepqmKbldHzllT7hBVR3pew8Zv5wKxDS20kECyQGI4sJWGojyfy3qxJu9Bekl_57YQgIn570tdErXQdS0OqaI2S0UImWJSwHpzMwggh_GTCVAPZjXk1ql5em7nkOLMr6vZ32TUxJwecmsZEeu4oN6aCUy.sl6yaGDw7VTa7iyJjHF5K66ynWRmYAPH11qr8iu68j4Lqtv2GtE4iRThPn4WpZwjIcZXG9rC3IxiSOKxPaMOKwKaCXTPmW.hpVzhqcMvT5OubgaNN_OBRNK.xGWuqXM1ZXjd8Q9QAHQm9PJck6Bhym4yM9tnQcG4h0kLI_yHWXVx9qLpUn7wsk8pKHHVUKbnIPTlO8fxsopzx8UFACF5MQ0qIhCc3qadGb8QYkFI2oHrsQdh8L2RThft_Y_Q7LUd9f7V3M656_zCQyGhE.2qsVVR50vCHGi5Frn_VtT_iNKHAOmAbdPnizr8j.TQ0mGvRTsViwGDBhBeWSYXrXjL1rOObtOyrlt49H.Vdrcmjm7N7bXFNOXbrGh5I9K1tmcDZQ0Ui1dSLojsubwqm1dwiixzuClrKUayJ4q10CvW9BYlTR4F2wez.M9Lf7Ws25V2WB8OQz7TwB5ytKQG8gfAc_WmYggq6KkT_ybxXP.p4xX0_jLne7qisRSEXDbE.nE_oX5_6gTVIQzAS_SXiMQMrHF.fEROMJIHB_NkpXzZD6QFIcGDrcnE8iOR5dXr74.nRpEcaf4feh6TkRXcf3QM5AdtX3YzX8MtnmxgCiESo8seM_ArYqU90PqcBGmElHBdLPqcoevihKQ8j14VEiuFLsO73AJOh0sd4.Xi_y2wdrauJgYlbQU2UBIerxsW4L4RBLEnpMFZiX6XF90OVbUUR2qolNrlErAyFsrkdW6KHwj3.xvuT26O0u6e7rpZ0vH90g6B7lRA_e6jwyLixrDqbwnm6JWLvVe2AzlMziA.2JR76fj7NfXk_rJKC1fahFHSJjW.d2vHeDzEUTu.7hZVvwyF5b_MBKzv1yUg.dmvYxyFiTCg4cQgjDihlJYOs2WBP9P_.MfGUh_NBJ5RvfLrAmEkE2Rh.r78pyIHwfuXfEwrb2lTitmltT7w2e924Sl6d84iuLi6GNfnKSRjFaGpqCd_oON89Hcw',};var a = document.createElement('script');a.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=9b51b7f61f9ae090';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null,"\/robots.txt?__cf_chl_rt_tk=DQ6g8xehpXByUdCA87YS1aGJNn232AL09C92cxNV3yE-1766931838-1.0.1.1-xlisPwV6MXhwDjl02eXRFQNsKAgp5SIHwYnrDaFtr0I"+ window._cf_chl_opt.cOgUHash);a.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(a);}());</script></body></html>
+
+### TEST 9: Security Headers Analysis ###
+
+
+
+### TEST 10: Installed Plugins Detection ###
+
+
+
+### TEST 11: Active Theme Detection ###
+
+
+
+### TEST 12: Login Rate Limiting Test ###
+
+Attempting 5 rapid login requests...
+Attempt 1: HTTP 403
+Attempt 2: HTTP 403
+Attempt 3: HTTP 403
+Attempt 4: HTTP 403
+Attempt 5: HTTP 403
+
+
+### TEST 13: Cloudflare Information Leak ###
+
+fl=1174f27
+h=your-site.com
+ip=XX.XX.XXX.XXX
+ts=1766931858.000
+visit_scheme=https
+uag=curl/8.17.0
+colo=NRT
+sliver=none
+http=http/2
+loc=JP
+tls=TLSv1.3
+sni=plaintext
+warp=off
+gateway=off
+rbi=off
+kex=X25519MLKEM768
+
+==================================================
+Assessment Complete!
+==================================================
